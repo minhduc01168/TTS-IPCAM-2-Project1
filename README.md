@@ -17,3 +17,73 @@ Với tốc độ cao hơn, có thể tạo được hiệu ứng quay chậm nh
      Hàm cv.fastNlMeansDenoising() sử dụng cho ảnh xám. 
      
      Hàm cv.fastNlMeansDenoisingColored() sử dụng cho ảnh màu.
+## **Phép toán mở (Opening)**
+Thực hiện phép co (Erosion) trước sau đó mới thực hiện phép giãn nở (Dilation). 
+
+**Công thức**
+
+![image](https://user-images.githubusercontent.com/81012512/185522131-7b063ff5-3499-4fe3-a165-21b57f178c64.png)
+
+**Ứng dụng:**
+Phép toán mở (Opening) được ứng dụng trong việc loại bỏ các phần lồi lõm và làm cho đường bao các đối tượng trong ảnh trở nên mượt mà hơn.
+
+Sử dụng hàm cv.morphologyEx() trong OpenCV với đối số cv.MORPH_OPEN
+
+## **Phép toán đóng (Closing)**
+Thực hiện phép giãn nở (Dilation) trước sau đó mới thực hiện phép co (Erosion). 
+
+**Công thức**
+
+![image](https://user-images.githubusercontent.com/81012512/185522317-d2052812-9c22-4602-8d69-eef81e407b7e.png)
+
+**Ứng dụng:**
+Phép toán đóng (Closing) được dùng trong ứng dụng làm trơn đường bao các đối tượng, lấp đầy các khoảng trống biên và loại bỏ những hố nhỏ.
+
+Sử dụng hàm cv.morphologyEx() trong OpenCV với đối số cv.MORPH_CLOSE
+
+## **Một số thuật toán tracking**
+1. Boosting
+
+    Trình theo dõi này chậm và không hoạt động tốt.
+
+2. MIL (Multiple Instance Learning)
+    Tốt hơn Boosting nhưng kém trong việc báo cáo lỗi.
+
+3. KCF (Kernel Correlation Filters)
+
+    Nhanh hơn Boosting và MIL. Nhưng tương tự MIL không xử lý tốt tình trạng tắc hoàn toàn.
+
+4. CSRT (Discriminative Correlation Filter với Channel và Spatial Reliability)
+
+    Có xu hướng chính xác hơn KCF nhưng chậm hơn một chút.
+
+5. MedianFlow
+
+    Nếu có quá nhiều bước nhảy trong chuyển động, chẳng hạn như các đối tượng di chuyển nhanh hoặc các đối tượng thay đổi nhanh chóng về ngoại hình của chúng, mô hình     sẽ thất bại.
+
+6. TLD (Tracking Learning Detection)
+
+    TLD dễ bị sai đối với các vật giả. Không nên sử dụng TLD với OpenCV 
+
+7. MOSSE (Minimum Output Sum of Squared) Error)
+
+    Rất, rất nhanh. Không chính xác như CSRT hoặc KCF nhưng là một lựa chọn tốt nếu cần tốc độ.
+
+8. Goturn (Generic Object Tracking Using Regression Networks)
+
+    Phát hiện dối tượng dựa trên deeplearning
+
+9. Meanshift
+    Dựa vào thuật toán phân cụm KMean 
+
+10. CAMShift (Continuously Adaptive Meanshift)
+
+    Camshift gần giống như meanhift, chỉ khác là trả về một hình chữ nhật xoay và các tham số được sử dụng để chuyển làm cửa sổ tìm kiếm trong lần lặp tiếp theo.
+
+11. Optical Flow Sparse 
+
+    Ước tính vectơ dịch chuyển của đối tượng gây ra bởi chuyển động hoặc chuyển động của máy ảnh.
+    
+12. Optical Flow Dense
+
+
