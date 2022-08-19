@@ -88,6 +88,8 @@ Sử dụng hàm cv.morphologyEx() trong OpenCV với đối số cv.MORPH_CLOSE
 
 **Đề xuất cá nhân**
 Sử dụng CSRT khi bạn cần độ chính xác theo dõi đối tượng cao hơn và có thể chịu được thông lượng FPS chậm hơn.
+
 Sử dụng KCF khi bạn cần thông lượng FPS nhanh hơn nhưng có thể xử lý độ chính xác theo dõi đối tượng thấp hơn một chút.
+
 Sử dụng MOSSE khi bạn cần tốc độ thuần.
 
