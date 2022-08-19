@@ -41,7 +41,7 @@ Không gian màu là một mô hình toán học dùng để mô tả các màu 
 
 K là thành phần phụ dùng để in cho những điểm màu có màu đen trong hệ CYMK, do vậy để chuyển không gian màu từ RGB sang CMYK trước hết ta chuyển RGB sang CMY sau đó tìm thành phần K còn lại.
 Công thức: $$(C', M', Y') = ((255 - R), (255 - G), (255 - B)) $$
-Về mặt lý thuyết có thể chấp nhận $$K = min{C'/2,55, M'/2,55, Y'/2,55}$$
+Về mặt lý thuyết có thể chấp nhận $$K = min \{C'/2,55, M'/2,55, Y'/2,55\}$$
 
 Ta có công thức
 $$C = (C'/2.55 - K) * 100 /(100 - K)$$
