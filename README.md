@@ -80,6 +80,8 @@ Trong đó B là background image tại thời điểm t, N là số khung hình
 
 Erosion hay còn gọi là xói mòn là một trong hai toán tử cơ bản trong lĩnh vực hình thái toán học (mathematical morphology). Nó thường được áp dụng trong những hình ảnh nhị phân tuy nhiên có một số phiên bản sẽ được áp dụng trên những hình ảnh xám tuy nhiên trong phạm vi bài viết của mình hôm nay thì chỉ tập trung vào những hình ảnh nhị phân.
 
+![image](https://tapit.vn/wp-content/uploads/2021/11/10.gif)
+
 Mục đích của phương pháp này sẽ giúp:
 - Loại bỏ những pixel nhiễu cô lập
 - Loại bỏ những pixel nhiễu xung quanh đối tượng giúp cho phần viền (cạnh) của đối tượng trở nên mịn hơn
