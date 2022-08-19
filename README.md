@@ -11,7 +11,7 @@ Con người thu nhận thông tin qua các giác quan, trong đó thị giác �
 
 **Hệ thống xử lý ảnh**
 
-<a href="https://ibb.co/qYVpv0B"><img src="https://i.ibb.co/VY5TsHV/Untitled.png" alt="Untitled" border="0"></a>
+<center><a href="https://ibb.co/qYVpv0B"><img src="https://i.ibb.co/VY5TsHV/Untitled.png" alt="Untitled" border="0"></a></center>
 
 **Khử nhiễu:** Có 2 loại nhiễu cơ bản trong quá trình thu nhận ảnh
 
@@ -41,10 +41,50 @@ Không gian màu là một mô hình toán học dùng để mô tả các màu 
 
 K là thành phần phụ dùng để in cho những điểm màu có màu đen trong hệ CYMK, do vậy để chuyển không gian màu từ RGB sang CMYK trước hết ta chuyển RGB sang CMY sau đó tìm thành phần K còn lại.
 Công thức: $$(C', M', Y') = ((255 - R), (255 - G), (255 - B)) $$
-Về mặt lý thuyết có thể chấp nhận $$ K = min {C'/2,55, M'/2,55, Y'/2,55} $$
+Về mặt lý thuyết có thể chấp nhận $$K = min {C'/2,55, M'/2,55, Y'/2,55}$$
+
 Ta có công thức
 $$C = (C'/2.55 - K) * 100 /(100 - K)$$
 
 $$M = (M'/2.55 - K) * 100 /(100 - K)$$
 
 $$Y = (Y'/2.55 - K) *100 /(100 - K)$$
+
+Trong đó, C, M, Y, K được làm tròn tới để lấy chỉ số nguyên.
+
+## Background Subtraction
+
+Background subtraction hay còn gọi là trừ nền là một trong những giải thuật đơn giản và phổ biến trong lĩnh vực Thị giác máy tính (Computer Vision). Thuật toán được sử dụng nhằm xác định đối tượng chuyển động trong camera nền tĩnh.
+
+- Frame Difference
+
+Ta sẽ tính hiệu giá trị pixel của khung hình hiện tại và khung hình trước đó nếu hiệu này lớn hơn ngưỡng **T** thì pixel tại vị trí đó thuộc về Foreground.
+
+<center><a href="https://imgbb.com/"><img src="https://i.ibb.co/KN2FRng/Untitled2.png" alt="Untitled2" border="0"></a></center>
+
+**Ưu điểm** của phương pháp này là tốc độ tính toán nhanh do việc khởi tạo background image chỉ đơn giản là việc lấy khung hình trước đó.
+
+**Nhược điểm** của phương pháp này là nó chỉ tốt với những đối tượng di chuyển liên tục nhưng khi có một đối tượng đứng yên trong khung hình quá lâu thì đối tượng này sẽ bị cho là background cùng với đó phương pháp này phụ thuộc rất nhiều vào ngưỡng T do đó với mỗi video ta đều phải chọn 1 ngưỡng phù hợp.
+
+<center><a href="https://imgbb.com/"><img src="https://i.ibb.co/bjhbHvK/Untitled3.png" alt="Untitled3" border="0"></a></center>
+
+- Mean Filter
+
+Thay vì chỉ sử dụng 1 khung hình trước đó để làm background image thì Mean Filter sử dụng **N** khung hình phía trước khung hình đang xét để khởi tạo background image. Giả sử khung hình đang xét tại thời điểm t thì background tương ứng với nó sẽ được tính như sau:
+
+<center><a href="https://imgbb.com/"><img src="https://i.ibb.co/1XN9dk8/Untitled4.png" alt="Untitled4" border="0"></a></center>
+
+Trong đó B là background image tại thời điểm t, N là số khung hình trước thời điểm t để dùng cho việc tính toán ra background image, $$I(x, y, t)$$ là khung hình tại thời điểm t. Sau khi khởi tạo background image thì phần còn lại của phương pháp này cũng giống với phương pháp frame difference.
+
+## Erosion
+
+Erosion hay còn gọi là xói mòn là một trong hai toán tử cơ bản trong lĩnh vực hình thái toán học (mathematical morphology). Nó thường được áp dụng trong những hình ảnh nhị phân tuy nhiên có một số phiên bản sẽ được áp dụng trên những hình ảnh xám tuy nhiên trong phạm vi bài viết của mình hôm nay thì chỉ tập trung vào những hình ảnh nhị phân.
+
+Mục đích của phương pháp này sẽ giúp:
+- Loại bỏ những pixel nhiễu cô lập
+- Loại bỏ những pixel nhiễu xung quanh đối tượng giúp cho phần viền (cạnh) của đối tượng trở nên mịn hơn
+- Loại bỏ lớp viền (cạnh) của đối tượng giúp đối tượng trở nên nhỏ hơn và đặt những pixel viền đó trở thành lớp nền của đối tượng
+
+
+
+
