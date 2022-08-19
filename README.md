@@ -2,7 +2,7 @@
 ## Một số khái niệm cơ bản
 **Xử lý ảnh là gì?**
 
-    Con người thu nhận thông tin qua các giác quan, trong đó thị giác đóng vai trò quan trọng nhất. Những năm trở lại đây với sự phát triển của phần cứng máy tính, xử lý ảnh và đồ hoạ đó phát triển một cách mạnh mẽ và có nhiều ứng dụng trong cuộc sống. Xử lý ảnh và đồ hoạ đóng một vai trò quan trọng trong tương tác người máy. Quá trình xử lý ảnh được xem như là quá trình thao tác ảnh đầu vào nhằm cho ra kết quả mong muốn. Kết quả đầu ra của một quá trình xử lý ảnh có thể là một ảnh “tốt hơn” hoặc một kết luận.
+Con người thu nhận thông tin qua các giác quan, trong đó thị giác đóng vai trò quan trọng nhất. Những năm trở lại đây với sự phát triển của phần cứng máy tính, xử lý ảnh và đồ hoạ đó phát triển một cách mạnh mẽ và có nhiều ứng dụng trong cuộc sống. Xử lý ảnh và đồ hoạ đóng một vai trò quan trọng trong tương tác người máy. Quá trình xử lý ảnh được xem như là quá trình thao tác ảnh đầu vào nhằm cho ra kết quả mong muốn. Kết quả đầu ra của một quá trình xử lý ảnh có thể là một ảnh “tốt hơn” hoặc một kết luận.
 
 **Ảnh và điểm ảnh**
 
@@ -40,8 +40,9 @@ Không gian màu là một mô hình toán học dùng để mô tả các màu 
 ### Chuyển đổi từ RGB sang CMYK và ngược lại
 
 K là thành phần phụ dùng để in cho những điểm màu có màu đen trong hệ CYMK, do vậy để chuyển không gian màu từ RGB sang CMYK trước hết ta chuyển RGB sang CMY sau đó tìm thành phần K còn lại.
-Công thức: $$(C', M', Y') = ((255 - R$), (255 - G), (255 - B$))$$
-Về mặt lý thuyết có thể chấp nhận K = min {C'/2,55, M'/2,55, Y'/2,55}
-C = (C'/2.55 - K) * 100 /(100 - K), 
-M = (M'/2.55 - K) * 100 /(100 - K), 
-Y = (Y'/2.55 - K) *100 /(100 - K) 
+Công thức: $$(C', M', Y') = ((255 - R), (255 - G), (255 - B)) $$
+Về mặt lý thuyết có thể chấp nhận $$ K = min {C'/2,55, M'/2,55, Y'/2,55} $$
+Ta có công thức
+$$ C = (C'/2.55 - K) * 100 /(100 - K) $$
+$$ M = (M'/2.55 - K) * 100 /(100 - K) $$
+$$ Y = (Y'/2.55 - K) *100 /(100 - K) $$
