@@ -80,9 +80,10 @@ background = cv2.cvtColor(background, cv2.COLOR_BGR2GRAY)
 #cv2.imshow('background_gray', background)
 frame_count = 0
 consecutive_frame = 2 #số lượng khung hình liên tiếp xem xét để tính sai lệch khung hình và tính tổng (paper su dung 8)
-dict = defaultdict(list)
-colors = []
-object_id_list = []
+dict = defaultdict(list) #defauldict
+# defauldict: https://stackoverflow.com/questions/5900578/how-does-collections-defaultdict-work
+colors = [] #list save color
+object_id_list = [] #list id objects
 while (cap.isOpened()):
     ret, frame = cap.read() # kieu boolean, trả về true nếu khung có sẵn.
     if ret == True:
@@ -129,39 +130,39 @@ while (cap.isOpened()):
                 # get the xmin, ymin, width, and height coordinates from the contours
                 if cv2.contourArea(contour) > 500 and ((x + w //2) <= 400 and (x + w //2) >= 200) and ((y + h) >= 150 and (y + h) <= 350):
                     # continue
-                    count += 1
+                    count += 1 # khi objects thuoc vung giam sat tang bien dem objects
                 detections.append([x, y, w, h])
             cv2.putText(orig_frame, "Track count: {}".format(count), (10, 40), cv2.FONT_HERSHEY_SIMPLEX,
-                        1, (0, 0, 255), 2)
+                        1, (0, 0, 255), 2) # hien thi so luong objects di vao vung giam sat
             boxes_ids = update(detections)
-            for box_id in boxes_ids:
+            for box_id in boxes_ids: # ve bounding boxes va hien thi id objects
                 x, y, w, h, id = box_id
                 # draw the bounding boxes
                 cv2.rectangle(orig_frame, (x, y - 5), (x + w, y + h + 5), (0, 255, 0), 2)
-                cv2.putText(orig_frame, str(id), (x, y - 15), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255), 2)
+                # cv2.putText(orig_frame, str(id), (x, y - 15), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255), 2)
             for id in boxes_ids:
-                dict[id[4]].append(((2 * id[0] + id[2]) // 2, (2 * id[1] + id[3]) // 2))
-
-                if id[4] not in object_id_list:
+                dict[id[4]].append(((2 * id[0] + id[2]) // 2, (2 * id[1] + id[3]) // 2)) # day diem di chuyen cua tung id vao dict
+                # dict[id[4]]=[(id1, [(bounding_frame1_x,bounding_frame1_y), (x2,y2)]), (id2, [(bounding_frame1_x,bounding_frame1_y), (x2,y2)]),...]
+                if id[4] not in object_id_list: # phat hien doi tuong moi--> add
                     object_id_list.append(id[4])
                     colors.append((np.random.randint(low=0, high=255), np.random.randint(low=0, high=255),
-                                   np.random.randint(low=0, high=255)))
-                    start_pt = ((2 * id[0] + id[2]) // 2, (2 * id[1] + id[3]) // 2)
-                    end_pt = ((2 * id[0] + id[2]) // 2, (2 * id[1] + id[3]) // 2)
-                    cv2.line(orig_frame, start_pt, end_pt, colors[id[4] - 1], 2)
-                else:
+                                   np.random.randint(low=0, high=255))) #xay dung mau cho tung duong di objects
+                    start_pt = ((2 * id[0] + id[2]) // 2, (2 * id[1] + id[3]) // 2) # diem dau line
+                    end_pt = ((2 * id[0] + id[2]) // 2, (2 * id[1] + id[3]) // 2) # diem cuoi line
+                    cv2.line(orig_frame, start_pt, end_pt, colors[id[4] - 1], 2) # draw line di chuyen
+                else: # neu objects da trong list object_id_list
                     l = len(dict[id[4]])
                     for pt in range(len(dict[id[4]])):
-                        if not pt + 1 == l:
+                        if not pt + 1 == l: # fix loi vuot index
                             start_pt = (dict[id[4]][pt][0], dict[id[4]][pt][1])
                             end_pt = (dict[id[4]][pt + 1][0], dict[id[4]][pt + 1][1])
                             cv2.line(orig_frame, start_pt, end_pt, colors[id[4] - 1], 2)
-            cv2.rectangle(orig_frame, (200, 150), (400, 350), (0, 255, 0), 3)
-            if count > 0:
-                orig_frame[150:350, 200:400, (0, 1)] = 0
-            resize_orig_frame = cv2.resize(orig_frame, (1280, 720), interpolation=cv2.INTER_LINEAR)
-            cv2.imshow('Detected Objects', resize_orig_frame)
-            out.write(resize_orig_frame)
+            cv2.rectangle(orig_frame, (200, 150), (400, 350), (0, 255, 0), 3) # draw vung giam sat
+            if count > 0: # chuyen vung giam sat sang mau do khi co doi tuong di chuyen vao
+                orig_frame[150:350, 200:400, (0, 1)] = 0 #set 0th (B: blue) and 1st (G: green) to 0 (black).
+            resize_orig_frame = cv2.resize(orig_frame, (1280, 720), interpolation=cv2.INTER_LINEAR) # thay doi kich thuoc hien thi 1280x720
+            cv2.imshow('Detected Objects', resize_orig_frame) # imshow frame
+            out.write(resize_orig_frame) # ghi video
             #out.write(thres)
             #out.write(frame)
             #out.write(orig_frame)
