@@ -1,0 +1,8 @@
+Detect Objects:https://debuggercafe.com/moving-object-detection-using-frame-differencing-with-opencv/
+
+Tracking Objects + id objects:https://www.analyticsvidhya.com/blog/2022/04/building-vehicle-counter-system-using-opencv/
+
+Defaultdict: https://www.geeksforgeeks.org/defaultdict-in-python/
+https://stackoverflow.com/questions/5900578/how-does-collections-defaultdict-work
+
+github tham khao: https://github.com/Abhishekjl/OPENCV-
