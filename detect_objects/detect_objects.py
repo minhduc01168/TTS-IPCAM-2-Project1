@@ -23,8 +23,6 @@ center_points = {}
 # Keep the count of the IDs
 # each time a new object id detected, the count will increase by one
 id_count = 0
-line_count = 0
-objects_rec_lines = [] # list chua list cac diem cua each frame
 def update(objects_rect):# objects_rect tọa độ xmin,ymin, w,h
     # Objects boxes and ids
     objects_bbs_ids = []
@@ -133,11 +131,6 @@ while (cap.isOpened()):
                     # continue
                     count += 1
                 detections.append([x, y, w, h])
-                #line_x = (x + x + w) // 2
-                #line_y = y + h
-                #objects_rec_line.append([line_x, line_y]) # fix code o list nay
-            #objects_rec_lines.append(objects_rec_line)
-            #print(objects_rec_lines)
             cv2.putText(orig_frame, "Track count: {}".format(count), (10, 40), cv2.FONT_HERSHEY_SIMPLEX,
                         1, (0, 0, 255), 2)
             boxes_ids = update(detections)
